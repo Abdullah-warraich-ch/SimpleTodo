@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TaskContext from "../../Context/TaskContext";
 
 function SearchBar() {
   const { tasks, setTasks } = React.useContext(TaskContext);
   const [searchTerm, setSearchTerm] = React.useState("");
-
+  const [originalTasks, setOriginalTask] = useState([...tasks]);
   function handleSearch(term) {
-    const filteredTasks = tasks.filter(
-      (tasks) => tasks.title.toLowerCase() === term.toLowerCase()
-    );
-    setTasks(filteredTasks);
+    if (term.trim() == "") {
+      setTasks(originalTasks);
+    } else {
+      const filteredTasks = tasks.filter((task) =>
+        task.title.toLowerCase().includes(term.toLowerCase())
+      );
+      setTasks(filteredTasks);
+    }
   }
-  
+
+  useEffect(() => handleSearch(searchTerm), [searchTerm]);
+
   return (
     <div>
       <input
