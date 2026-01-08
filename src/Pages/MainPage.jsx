@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "./Login";
+import Login from "../components/layout/Login";
 import SearchBar from "../components/ui/SearchBar";
 import Task from "../components/ui/Task";
 import { Plus } from "lucide-react";
