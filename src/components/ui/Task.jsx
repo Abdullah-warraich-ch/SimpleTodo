@@ -3,9 +3,9 @@ import { Checkbox } from "@headlessui/react";
 import { Check } from "lucide-react";
 import TaskContext from "../../Context/TaskContext";
 
-function Task() {
+function Task({ tasks }) {
   const [enabled, setEnabled] = React.useState(false);
-  const { tasks, setTasks } = useContext(TaskContext);
+  const { setTasks } = useContext(TaskContext);
   return tasks.map((item) => (
     <div
       className="flex  h-full items-center px-5 border-b-2 border-gray-200 py-5"
@@ -15,8 +15,8 @@ function Task() {
         <Checkbox
           checked={item.completed}
           onChange={() => {
-            setTasks(
-              tasks.map((task) =>
+            setTasks((prev) =>
+              prev.map((task) =>
                 task.id === item.id
                   ? { ...task, completed: !task.completed }
                   : task
